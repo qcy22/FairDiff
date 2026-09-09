@@ -1,0 +1,9 @@
+torch==2.7.1
+numpy==1.26.4
+scipy==1.15.3
+geomstats==2.8.0
+pandas==2.3.0
+scikit-learn==1.7.0
+mip==1.15.0
+matplotlib==3.10.3
+tqdm==4.67.1

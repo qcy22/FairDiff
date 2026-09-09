@@ -1,0 +1,58 @@
+# FairDiff 推荐系统配置文件
+
+# 训练配置
+training:
+  epochs: 200
+  seed: 42
+  batch_size: 4096
+  eval_batch_size: 4096
+  recording_epoch: 120
+  freeze_embedding_path: null
+  user_tiers: 20
+
+model: "PMF"
+
+active_strategies: ["diffusion"]
+
+dataset: "MovieLens-1m"  
+
+# 优化器配置
+optimizer:
+  name: "adam"
+  adam_lr: 5e-4
+  l2_regularization: 1e-5
+
+# 模型特定配置
+models:
+  PMF:
+    emb_dim: 32
+
+  NGCF:
+    emb_dim: 32
+
+  LightGCN:
+    emb_dim: 32
+    n_layers: 2
+
+# 策略配置
+strategies:
+  original:
+    display_name: "原始模型"
+    strategy_class: "OriginalStrategy"
+    strategy_params: {}
+
+  diffusion:
+    display_name: "扩散模型"
+    strategy_class: "DiffusionStrategy"
+    strategy_params:
+      diffusion_weight: 1
+      freeze_epoch: 100
+      sigma_min: 0.02
+      sigma_max: 3.0
+      sigma_data: 0.2
+      trial_times: 30
+      use_curriculum: true
+      use_ambient: true
+      sample_from_gaussian: false
+      guidance_scale: 1.0
+
